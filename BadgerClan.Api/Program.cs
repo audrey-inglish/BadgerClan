@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddSingleton<StrategyService>();
 builder.Services.AddSingleton<IStrategy, RunGunStrategy>();
 builder.Services.AddSingleton<IStrategy, DoNothingStrategy>();
 

@@ -17,7 +17,7 @@ public partial class GameControllerViewModel : ObservableObject
     private string currentStrategy;
 
     public List<string> AvailableStrategies { get; } = new List<string>
-    { "RunGunStrategy", "DoNothingStrategy" }; // should I use "Strategy" suffix?
+    { "RunGun", "DoNothing" };
 
 
     public GameControllerViewModel(IApiService apiService)
@@ -25,6 +25,7 @@ public partial class GameControllerViewModel : ObservableObject
         this.apiService = apiService;
         CurrentStrategy = AvailableStrategies[0];
     }
+
 
 
     [RelayCommand]

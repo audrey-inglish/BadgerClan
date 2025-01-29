@@ -20,7 +20,7 @@ public class ApiService : IApiService
 
     public async Task SetStrategyAsync(string strategyChoice)
     {
-        var url = $"/strategy/{strategyChoice}";
+        var url = $"/setstrategy/{strategyChoice}";
         var response = await _httpClient.GetAsync(url);
 
         try

@@ -16,8 +16,8 @@
                FontSize="Large"
                HorizontalOptions="Center" />
 
-        <!--<Button Text="Set Strategy"
+        <Button Text="Set Strategy"
                 Command="{Binding SetStrategyCommand}"
-                CommandParameter="{Binding CurrentStrategy}" />-->
+                CommandParameter="{Binding CurrentStrategy}" />
     </VerticalStackLayout>
 </ContentPage>
