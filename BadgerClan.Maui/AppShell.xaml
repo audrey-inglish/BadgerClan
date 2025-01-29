@@ -3,13 +3,13 @@
     x:Class="BadgerClan.Maui.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:BadgerClan.Maui"
+    xmlns:local="clr-namespace:BadgerClan.Maui.Views"
     Shell.FlyoutBehavior="Flyout"
     Title="BadgerClan.Maui">
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        Title="Controller"
+        ContentTemplate="{DataTemplate local:GameControllerView}"
         Route="MainPage" />
 
 </Shell>

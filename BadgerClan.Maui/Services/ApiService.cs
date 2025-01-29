@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
+//using Java.Util.Logging;
 
 namespace BadgerClan.Maui.Services;
 
@@ -17,8 +18,26 @@ public class ApiService : IApiService
         _httpClient = clientFactory.CreateClient("GameControllerApi");
     }
 
-    public Task SetStrategyAsync(string strategyChoice)
+    public async Task SetStrategyAsync(string strategyChoice)
     {
-        throw new NotImplementedException();
+        var url = $"/strategy/{strategyChoice}";
+        var response = await _httpClient.GetAsync(url);
+
+        try
+        {
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Strategy successfully set!");
+            }
+            else
+            {
+                Console.WriteLine("Failed to set strategy.");
+                throw new Exception("Failed to set strategy: " + response.ReasonPhrase);
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to set strategy: " + ex.Message);
+        }
     }
 }

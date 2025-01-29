@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BadgerClan.Maui.ViewModels;
 
-public class RemoteViewModel
+public class GameControllerViewModel
 {
 
 }
