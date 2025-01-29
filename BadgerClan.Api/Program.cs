@@ -1,4 +1,5 @@
 using BadgerClan.Logic;
+using BadgerClan.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +21,12 @@ app.UseHttpsRedirection();
 
 var client = new HttpClient();
 
-app.MapPost("/strategy", async (BadgerClan.Logic.StrategyRequest request) =>
-{
+app.MapGet("/", () => "API is running!");
 
+app.MapPost("/test", async (StrategyRequest request) =>
+{
+    // for testing:
+    return Results.Ok(new {Message = "Received request from game server", ReceivedStrategy = request });
 });
 
 

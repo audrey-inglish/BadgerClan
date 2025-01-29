@@ -1,11 +1,15 @@
-﻿namespace BadgerClan.Api;
+﻿using BadgerClan.Logic;
+
+namespace BadgerClan.Api;
 
 public class StrategyRequest
 {
-    // I have no idea what I'm doing 
+    public int YourTeamId { get; set; }
+    string StrategyType { get; set; }
+    MoveRequest MoveRequest { get; set; }
 }
 
-public class StrategyType
-{
+//public class StrategyType
+//{
 
-}
+//}
