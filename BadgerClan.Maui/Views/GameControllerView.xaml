@@ -4,9 +4,20 @@
              x:Class="BadgerClan.Maui.Views.GameControllerView"
              Title="GameControllerView">
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+
+        <Label Text="Choose Strategy: " FontSize="Medium"/>
+        <Picker ItemsSource="{Binding AvailableStrategies}"
+                SelectedItem="{Binding CurrentStrategy}" />
+
+        <Label Text="Current Strategy:"
+               FontSize="Large"
+               HorizontalOptions="Center" />
+        <Label Text="{Binding CurrentStrategy}"
+               FontSize="Large"
+               HorizontalOptions="Center" />
+
+        <!--<Button Text="Set Strategy"
+                Command="{Binding SetStrategyCommand}"
+                CommandParameter="{Binding CurrentStrategy}" />-->
     </VerticalStackLayout>
 </ContentPage>
