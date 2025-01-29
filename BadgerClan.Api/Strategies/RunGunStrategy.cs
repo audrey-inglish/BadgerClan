@@ -10,10 +10,6 @@ public class RunGunStrategy : IStrategy
         var myUnits = request.Units.Where(u => u.Team == request.YourTeamId);
         var moves = new List<Move>();
 
-        //if (myteam is null)
-        //    return Task.FromResult(new List<Move>());
-
-
         // loop through all my guys & decide on the move
         foreach (var unit in myUnits)
         {
@@ -34,7 +30,7 @@ public class RunGunStrategy : IStrategy
                 else
                 {
                     // if not close enough to attack, get closer to enemy
-                    moves.Add(new Move(MoveType.Walk, unit.Id, closest.Location));
+                    moves.Add(new Move(MoveType.Walk, unit.Id, unit.Location.Toward(closest.Location)));
                 }
             }
         }

@@ -50,7 +50,7 @@ app.MapPost("/", async ([FromBody] MoveRequest request, [FromServices] StrategyS
     var strategy = strategyService.GetStrategy();
     var moves = await strategy.GetMovesAsync(request);
 
-    return new MoveResponse(myMoves);
+    return new MoveResponse(moves);
 });
 
 //app.Run();
