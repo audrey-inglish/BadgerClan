@@ -17,7 +17,7 @@ public partial class GameControllerViewModel : ObservableObject
     private string currentStrategy;
 
     public List<string> AvailableStrategies { get; } = new List<string>
-    { "RunGun", "DoNothing" };
+    { "RunGun", "DoNothing", "CornerRetreat" };
 
 
     public GameControllerViewModel(IApiService apiService)

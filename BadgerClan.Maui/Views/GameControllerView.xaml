@@ -9,12 +9,12 @@
         <Picker ItemsSource="{Binding AvailableStrategies}"
                 SelectedItem="{Binding CurrentStrategy}" />
 
-        <Label Text="Current Strategy:"
+        <!--<Label Text="Current Strategy:"
                FontSize="Large"
                HorizontalOptions="Center" />
         <Label Text="{Binding CurrentStrategy}"
                FontSize="Large"
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center" />-->
 
         <Button Text="Set Strategy"
                 Command="{Binding SetStrategyCommand}"
