@@ -3,11 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BadgerClan.Maui.Views.GameControllerView"
              Title="GameControllerView">
-    <VerticalStackLayout>
 
-        <Label Text="Choose Strategy: " FontSize="Medium"/>
+
+
+    <VerticalStackLayout BackgroundColor="#dcd9fa">
+    <VerticalStackLayout Padding="20" 
+                         WidthRequest="550">
+
+        <Label Text="Choose Strategy: " 
+               FontSize="Medium"
+               FontAttributes="Bold"/>
         <Picker ItemsSource="{Binding AvailableStrategies}"
-                SelectedItem="{Binding CurrentStrategy}" />
+                SelectedItem="{Binding CurrentStrategy}" 
+                Margin="0,15,0,10"
+                BackgroundColor="White"/>
 
         <!--<Label Text="Current Strategy:"
                FontSize="Large"
@@ -19,5 +28,6 @@
         <Button Text="Set Strategy"
                 Command="{Binding SetStrategyCommand}"
                 CommandParameter="{Binding CurrentStrategy}" />
+    </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
