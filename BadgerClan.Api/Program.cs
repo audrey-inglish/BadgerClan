@@ -23,7 +23,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 
 
@@ -55,4 +55,4 @@ app.MapPost("/", async ([FromBody] MoveRequest request, [FromServices] StrategyS
 });
 
 //app.Run();
-app.Run("https://localhost:2000");
+app.Run("http://localhost:2000");
