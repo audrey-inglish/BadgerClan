@@ -13,6 +13,7 @@ builder.Services.AddSingleton<StrategyService>();
 builder.Services.AddSingleton<IStrategy, RunGunStrategy>();
 builder.Services.AddSingleton<IStrategy, DoNothingStrategy>();
 builder.Services.AddSingleton<IStrategy, CornerRetreatStrategy>();
+builder.Services.AddSingleton<IStrategy, AmbushStrategy>();
 
 
 var app = builder.Build();
