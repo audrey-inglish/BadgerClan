@@ -28,11 +28,11 @@ public static class MauiProgram
         string baseAddress;
         if (DeviceInfo.Platform == DevicePlatform.Android)
         {
-            baseAddress = "http://10.0.2.2:2000";
+            baseAddress = "http://10.0.2.2:5140";
         }
         else
         {
-            baseAddress = "http://localhost:2000";
+            baseAddress = "http://localhost:5140";
         }
 
 

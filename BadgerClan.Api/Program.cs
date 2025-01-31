@@ -56,4 +56,4 @@ app.MapPost("/", async ([FromBody] MoveRequest request, [FromServices] StrategyS
 });
 
 //app.Run();
-app.Run("http://localhost:2000");
+app.Run();
