@@ -46,10 +46,12 @@ app.MapPost("/", async ([FromBody] MoveRequest request, [FromServices] StrategyS
     app.Logger.LogInformation("Received move request for game {gameId} turn {turnNumber}", request.GameId, request.TurnNumber);
     var myMoves = new List<Move>();
 
-    var currentStrategy = strategyService.GetStrategy();
+    //var currentStrategy = strategyService.GetStrategy();
 
     // get the strategy currently set and return the moves it chooses
     var strategy = strategyService.GetStrategy();
+
+    app.Logger.LogInformation("Applying strategy {strategyName}", strategy.GetType().Name);
     var moves = await strategy.GetMovesAsync(request);
 
     return new MoveResponse(moves);
