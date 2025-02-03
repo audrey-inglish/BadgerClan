@@ -27,8 +27,11 @@ jobs:
         run: dotnet build BadgerClan.Api/BadgerClan.Api.csproj --configuration Release
 
 
-      - name: dotnet publish
-        run: dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapi"`
+      - name: Publish API only
+        run: |
+          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapi"
+        shell: bash
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
