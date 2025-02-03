@@ -23,8 +23,11 @@ jobs:
         with:
           dotnet-version: '9.x'
 
-      - name: Build with dotnet
-        run: dotnet build BadgerClan.Api/BadgerClan.Api.csproj --configuration Release
+      - name: Restore API dependencies only
+        run: dotnet restore BadgerClan.Api/BadgerClan.Api.csproj
+
+      - name: Build API only
+        run: dotnet build BadgerClan.Api/BadgerClan.Api.csproj --configuration Release --no-restore
 
 
       - name: Publish API only
