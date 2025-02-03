@@ -29,13 +29,13 @@
                 Command="{Binding SetStrategyCommand}"
                 CommandParameter="{Binding CurrentStrategy}" />
 
-            <Picker ItemsSource="{Binding ApiUrls}"
+            <Picker ItemsSource="{Binding ApiNames}"
                 Margin="0,15,0,10"
-                SelectedItem="{Binding CurrentApiUrl}"
+                SelectedItem="{Binding SelectedApi}"
                 BackgroundColor="White"/>
             <Button Text="Set API URL"
                 Command="{Binding SetApiUrlCommand}"
-                CommandParameter="{Binding CurrentApiUrl}"/>
+                CommandParameter="{Binding SelectedApi}"/>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

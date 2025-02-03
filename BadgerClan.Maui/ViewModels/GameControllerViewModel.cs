@@ -17,10 +17,10 @@ public partial class GameControllerViewModel : ObservableObject
     private string currentStrategy;
 
     [ObservableProperty]
-    private string currentApiUrl;
+    private string selectedApi;
 
-    public List<String> ApiUrls { get; } = new List<string>
-    { "http://localhost:5140", "Azure1", "Azure2" };
+    public List<String> ApiNames { get; } = new List<string>
+    { "Local Dev", "Azure1", "Azure2" };
 
     public List<string> AvailableStrategies { get; } = new List<string>
     { "RunGun", "DoNothing", "CornerRetreat", "Ambush" };
@@ -30,7 +30,8 @@ public partial class GameControllerViewModel : ObservableObject
     {
         this.apiService = apiService;
         CurrentStrategy = AvailableStrategies[0];
-        currentApiUrl = Preferences.Get("CurrentApiUrl", "http://localhost:5140");
+        SelectedApi = ApiNames[0];
+        SetApiUrl(SelectedApi);
     }
 
 
@@ -46,8 +47,20 @@ public partial class GameControllerViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private async Task SetApiUrl(string apiUrl)
+    private void SetApiUrl(string apiName)
     {
-        Preferences.Set("CurrentApiUrl", apiUrl);
+        switch (apiName)
+        {
+            case "Local Dev":
+                apiName = "http://localhost:5140";
+                break;
+            case "Azure1":
+                apiName = "https://example-azure-address1.net";
+                break;
+            case "Azure2":
+                apiName = "https://example-azure-address2.net";
+                break;
+        }
+        Preferences.Set("CurrentApiUrl", apiName);
     }
 }
