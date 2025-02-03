@@ -16,6 +16,12 @@ public partial class GameControllerViewModel : ObservableObject
     [ObservableProperty]
     private string currentStrategy;
 
+    [ObservableProperty]
+    private string currentApiUrl;
+
+    public List<String> ApiUrls { get; } = new List<string>
+    { "http://localhost:5140", "Azure1", "Azure2" };
+
     public List<string> AvailableStrategies { get; } = new List<string>
     { "RunGun", "DoNothing", "CornerRetreat", "Ambush" };
 
@@ -24,6 +30,7 @@ public partial class GameControllerViewModel : ObservableObject
     {
         this.apiService = apiService;
         CurrentStrategy = AvailableStrategies[0];
+        currentApiUrl = Preferences.Get("CurrentApiUrl", "http://localhost:5140");
     }
 
 
@@ -36,5 +43,11 @@ public partial class GameControllerViewModel : ObservableObject
         // the UI will update automatically
         CurrentStrategy = strategyChoice;
 
+    }
+
+    [RelayCommand]
+    private async Task SetApiUrl(string apiUrl)
+    {
+        Preferences.Set("CurrentApiUrl", apiUrl);
     }
 }

@@ -28,6 +28,14 @@
         <Button Text="Set Strategy"
                 Command="{Binding SetStrategyCommand}"
                 CommandParameter="{Binding CurrentStrategy}" />
-    </VerticalStackLayout>
+
+            <Picker ItemsSource="{Binding ApiUrls}"
+                Margin="0,15,0,10"
+                SelectedItem="{Binding CurrentApiUrl}"
+                BackgroundColor="White"/>
+            <Button Text="Set API URL"
+                Command="{Binding SetApiUrlCommand}"
+                CommandParameter="{Binding CurrentApiUrl}"/>
+        </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>

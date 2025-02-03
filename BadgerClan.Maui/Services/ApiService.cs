@@ -15,16 +15,18 @@ public class ApiService : IApiService
 
     public ApiService(IHttpClientFactory clientFactory)
     {
-        _httpClient = clientFactory.CreateClient("GameControllerApi");
+        _httpClient = clientFactory.CreateClient();
     }
 
     public async Task SetStrategyAsync(string strategyChoice)
     {
-        var url = $"/setstrategy/{strategyChoice}";
-        var response = await _httpClient.GetAsync(url);
+        var baseUrl = Preferences.Get("CurrentApiUrl", "http://localhost:5140").TrimEnd('/');
+
+        var url = $"{baseUrl}/setstrategy/{strategyChoice}";
 
         try
         {
+            var response = await _httpClient.GetAsync(url);
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Strategy successfully set!");
