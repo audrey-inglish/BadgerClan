@@ -55,7 +55,7 @@ public partial class GameControllerViewModel : ObservableObject
                 apiName = "http://localhost:5140";
                 break;
             case "Azure1":
-                apiName = "https://example-azure-address1.net";
+                apiName = "https://badgerclan-api1-gtapbpbha4apgtew.westus2-01.azurewebsites.net";
                 break;
             case "Azure2":
                 apiName = "https://example-azure-address2.net";
