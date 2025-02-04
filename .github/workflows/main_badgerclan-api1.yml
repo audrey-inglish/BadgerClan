@@ -35,6 +35,12 @@ jobs:
           dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp" --no-dependencies
         shell: bash
 
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
   deploy:
     runs-on: windows-latest
     needs: build
@@ -46,6 +52,11 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -53,14 +64,13 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_288C290B10BD4DC5ADFEB6B3C6E831ED }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80C0E279C31642F5B52608E2A0154991 }}
 
-      - name: Deploy to Azure Web App (First One)
+      - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'badgerclan-api1'
           slot-name: 'Production'
-          package: .        
-
+          package: .
       # - name: Deploy to Azure Web App (Second One)
       #   id: deploy-to-webapp-2
       #   uses: azure/webapps-deploy@v3
