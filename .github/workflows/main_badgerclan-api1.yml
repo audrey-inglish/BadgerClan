@@ -64,10 +64,18 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_288C290B10BD4DC5ADFEB6B3C6E831ED }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80C0E279C31642F5B52608E2A0154991 }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App (First One)
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'badgerclan-api1'
           slot-name: 'Production'
           package: .        
+
+      - name: Deploy to Azure Web App (Second One)
+        id: deploy-to-webapp-2
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'badgerclan-api2'
+          slot-name: 'Production'
+          package: .     
