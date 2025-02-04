@@ -32,7 +32,7 @@ jobs:
 
       - name: Publish API only
         run: |
-          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapi"
+          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapi" --no-dependencies
         shell: bash
 
       - name: Upload artifact for deployment job
