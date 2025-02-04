@@ -32,7 +32,7 @@ jobs:
 
       - name: Publish API only
         run: |
-          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp" --no-dependencies
+          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{ github.workspace }}/api_output"
         shell: bash
 
       # - name: Upload artifact for deployment job
@@ -70,7 +70,7 @@ jobs:
         with:
           app-name: 'badgerclan-api1'
           slot-name: 'Production'
-          package: .        
+          package: '${{ github.workspace }}/api_output'        
 
       - name: Deploy to Azure Web App (Second One)
         id: deploy-to-webapp-2
@@ -78,4 +78,4 @@ jobs:
         with:
           app-name: 'badgerclan-api-2'
           slot-name: 'Production'
-          package: .     
+          package: '${{ github.workspace }}/api_output'     
