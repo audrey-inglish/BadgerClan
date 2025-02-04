@@ -76,6 +76,6 @@ jobs:
         id: deploy-to-webapp-2
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'badgerclan-api2'
+          app-name: 'badgerclan-api-2'
           slot-name: 'Production'
           package: .     
