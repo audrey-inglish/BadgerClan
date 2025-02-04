@@ -28,9 +28,9 @@ public partial class GameControllerViewModel : ObservableObject
 
     private Dictionary<string, string> ApiUrls { get; } = new Dictionary<string, string>
         {
-            { "Local Dev", "http://localhost:5140" },
-            { "Azure1", "https://badgerclan-api1-gtapbpbha4apgtew.westus2-01.azurewebsites.net" },
-            { "Azure2", "https://badgerclan-api-2-d8b9dferdvhbbtdz.westus2-01.azurewebsites.net/" }
+            { "Local Dev", "http://localhost:5140" }
+            //{ "Azure1", "https://badgerclan-api1-gtapbpbha4apgtew.westus2-01.azurewebsites.net" },
+            //{ "Azure2", "https://badgerclan-api-2-d8b9dferdvhbbtdz.westus2-01.azurewebsites.net/" }
         };
 
 
