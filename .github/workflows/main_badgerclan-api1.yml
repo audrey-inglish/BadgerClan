@@ -61,10 +61,10 @@ jobs:
           slot-name: 'Production'
           package: .        
 
-      - name: Deploy to Azure Web App (Second One)
-        id: deploy-to-webapp-2
-        uses: azure/webapps-deploy@v3
-        with:
-          app-name: 'badgerclan-api-2'
-          slot-name: 'Production'
-          package: .     
+      # - name: Deploy to Azure Web App (Second One)
+      #   id: deploy-to-webapp-2
+      #   uses: azure/webapps-deploy@v3
+      #   with:
+      #     app-name: 'badgerclan-api-2'
+      #     slot-name: 'Production'
+      #     package: .     
