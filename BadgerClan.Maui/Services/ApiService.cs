@@ -18,11 +18,12 @@ public class ApiService : IApiService
         _httpClient = clientFactory.CreateClient();
     }
 
-    public async Task SetStrategyAsync(string strategyChoice)
+    public async Task SetStrategyAsync(string apiUrl, string strategyChoice)
     {
-        var baseUrl = Preferences.Get("CurrentApiUrl", "http://localhost:5140").TrimEnd('/');
+        //var baseUrl = Preferences.Get("CurrentApiUrl", "http://localhost:5140").TrimEnd('/');
+        //var url = $"{baseUrl}/setstrategy/{strategyChoice}";
 
-        var url = $"{baseUrl}/setstrategy/{strategyChoice}";
+        var url = $"{apiUrl.TrimEnd('/')}/setstrategy/{strategyChoice}";
 
         try
         {

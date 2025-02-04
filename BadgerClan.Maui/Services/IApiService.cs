@@ -8,5 +8,5 @@ namespace BadgerClan.Maui.Services;
 
 public interface IApiService
 {
-    public Task SetStrategyAsync(string strategyChoice);
+    public Task SetStrategyAsync(string apiUrl, string strategyChoice);
 }

@@ -7,35 +7,65 @@
 
 
     <VerticalStackLayout BackgroundColor="#dcd9fa">
-    <VerticalStackLayout Padding="20" 
+        <VerticalStackLayout Padding="20" 
                          WidthRequest="400">
+            
+            <!--let users input APIs-->
+            <VerticalStackLayout Padding="20">
+                <Label Text="New API"
+                       FontSize="Medium"
+                       FontAttributes="Bold"/>
+                <Entry Placeholder="API Nickname"
+                       Text="{Binding NewApiName}"
+                       Margin="0,5,0,5"
+                       BackgroundColor="White"/>
+                <Entry Placeholder ="API URL"
+                       Text="{Binding NewApiUrl}"
+                       Margin="0,5,0,5"
+                       BackgroundColor="White"/>
 
-        <Label Text="Choose Strategy: " 
-               FontSize="Medium"
-               FontAttributes="Bold"/>
-        <Picker ItemsSource="{Binding AvailableStrategies}"
-                SelectedItem="{Binding CurrentStrategy}" 
-                Margin="0,15,0,10"
-                BackgroundColor="White"/>
+                <Button Text="Add API"
+                        Command="{Binding AddNewApiCommand}"/>
+            </VerticalStackLayout>
+            
+            <!--select from added apis and set strategies-->
+            <VerticalStackLayout Margin="0, 20, 0, 0" Padding="20">
+                <Label Text="Choose Strategy" FontAttributes="Bold" FontSize="Medium"/>
+                <Picker ItemsSource="{Binding AvailableStrategies}"
+                        SelectedItem="{Binding CurrentStrategy}" 
+                        Margin="0,10,0,15"
+                        BackgroundColor="White"/>           
+                
+                <Label Text="Choose APIs to Appy Strategy:" 
+                       Margin="0,0,0,10"
+                       FontAttributes="Bold"/>
+                <StackLayout>
+                    <!--<Label Text="Select All APIs"/>
+                    <CheckBox IsChecked="{Binding SelectAllApisCommand}"/>-->
 
-        <!--<Label Text="Current Strategy:"
-               FontSize="Large"
-               HorizontalOptions="Center" />
-        <Label Text="{Binding CurrentStrategy}"
-               FontSize="Large"
-               HorizontalOptions="Center" />-->
+                    <CollectionView ItemsSource="{Binding ApiSelections}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <HorizontalStackLayout VerticalOptions="Center">
+                                    <CheckBox IsChecked="{Binding IsSelected}" 
+                                              VerticalOptions="Center"/>
+                                    <Label Text="{Binding ApiName}" VerticalOptions="Center"/>
+                                </HorizontalStackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                
+                
 
-        <Button Text="Set Strategy"
-                Command="{Binding SetStrategyCommand}"
-                CommandParameter="{Binding CurrentStrategy}" />
+                <Button Text="Apply Strategies"
+                        Command="{Binding ApplyStrategyToApisCommand}"
+                        CommandParameter="{Binding CurrentStrategy}"/>
 
-            <Picker ItemsSource="{Binding ApiNames}"
-                Margin="0,15,0,10"
-                SelectedItem="{Binding SelectedApi}"
-                BackgroundColor="White"/>
-            <Button Text="Set API URL"
-                Command="{Binding SetApiUrlCommand}"
-                CommandParameter="{Binding SelectedApi}"/>
+            </VerticalStackLayout>
+            
+            
+            
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
