@@ -12,7 +12,7 @@ public class StrategyService
         _allStrategies = strategies.ToDictionary(s => s.GetType().Name.ToLower().Replace("strategy", "")); ;
 
         // default strategy is Run & Gun
-        _currentStrategy = _allStrategies["rungun"];
+        _currentStrategy = _allStrategies["donothing"];
     }
 
     public IStrategy GetStrategy()

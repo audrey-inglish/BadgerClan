@@ -29,7 +29,7 @@ public partial class GameControllerViewModel : ObservableObject
     public GameControllerViewModel(IApiService apiService)
     {
         this.apiService = apiService;
-        CurrentStrategy = AvailableStrategies[0];
+        CurrentStrategy = AvailableStrategies[1];
         SelectedApi = ApiNames[0];
         SetApiUrl(SelectedApi);
     }
@@ -58,7 +58,7 @@ public partial class GameControllerViewModel : ObservableObject
                 apiName = "https://badgerclan-api1-gtapbpbha4apgtew.westus2-01.azurewebsites.net";
                 break;
             case "Azure2":
-                apiName = "https://example-azure-address2.net";
+                apiName = "https://badgerclan-api-2-d8b9dferdvhbbtdz.westus2-01.azurewebsites.net/";
                 break;
         }
         Preferences.Set("CurrentApiUrl", apiName);
