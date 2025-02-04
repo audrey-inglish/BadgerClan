@@ -1,0 +1,73 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - badgerclan-api1
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+
+      - name: Restore API dependencies only
+        run: dotnet restore BadgerClan.Api/BadgerClan.Api.csproj
+
+      - name: Build API only
+        run: dotnet build BadgerClan.Api/BadgerClan.Api.csproj --configuration Release --no-restore
+
+
+      - name: Publish API only
+        run: |
+          dotnet publish BadgerClan.Api/BadgerClan.Api.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapi" --no-dependencies
+        shell: bash
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapi
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_C303787A494645E7AEA1E03608B23B8B }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_288C290B10BD4DC5ADFEB6B3C6E831ED }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_80C0E279C31642F5B52608E2A0154991 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'badgerclan-api1'
+          slot-name: 'Production'
+          package: ${{env.DOTNET_ROOT}}/myapi          
