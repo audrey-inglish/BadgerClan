@@ -117,7 +117,7 @@ public partial class GameControllerViewModel : ObservableObject
 
                 if (api.ClientType == ApiType.Rest)
                 {
-                    // Call the REST service
+                    // REST service
                     await apiService.SetStrategyAsync(apiUrl, CurrentStrategy);
                 }
                 else if (api.ClientType == ApiType.Grpc)

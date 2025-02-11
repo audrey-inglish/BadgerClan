@@ -72,9 +72,9 @@ public static class MauiProgram
 public class GrpcStrategyClient : IDisposable
 {
 #if DEBUG
-    private const string GrpcApiAddress = "http://localhost:5140";
+    private const string GrpcApiAddress = "http://localhost:5000";
 #else
-    private const string GrpcApiAddress = "http://localhost:5140";
+    private const string GrpcApiAddress = "http://localhost:5001";
 #endif
 
     private GrpcChannel channel;
