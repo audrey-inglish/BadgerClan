@@ -39,6 +39,7 @@ public static class MauiProgram
             baseAddress = "http://localhost:5140";
         }
 
+        builder.Services.AddSingleton<GrpcSchedulerClient>();
 
         builder.Services.AddSingleton<IApiService, ApiService>();
         builder.Services.AddHttpClient("GameControllerApi", client =>
@@ -56,12 +57,14 @@ public static class MauiProgram
     private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<GameControllerView>();
+        builder.Services.AddTransient<GrpcTest>();
         return builder;
     }
 
     private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
     {
         builder.Services.AddTransient<GameControllerViewModel>();
+        builder.Services.AddTransient<GrpcTestViewModel>();
         return builder;
     }
 }
@@ -69,9 +72,9 @@ public static class MauiProgram
 public class GrpcSchedulerClient : IDisposable
 {
 #if DEBUG
-    private const string GrpcApiAddress = "https://localhost:5001";
+    private const string GrpcApiAddress = "http://localhost:5140";
 #else
-    private const string GrpcApiAddress = "https://localhost:5001";
+    private const string GrpcApiAddress = "http://localhost:5140";
 #endif
 
     private GrpcChannel channel;
@@ -85,6 +88,6 @@ public class GrpcSchedulerClient : IDisposable
     }
     public void Dispose()
     {
-        throw new NotImplementedException();
+        channel.Dispose();
     }
 }

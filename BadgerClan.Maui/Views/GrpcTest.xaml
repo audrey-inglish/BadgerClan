@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BadgerClan.Maui.Views.GrpcTest"
+             Title="GrpcTest">
+    <VerticalStackLayout>
+        <Button Text="Set Strategy to RunGun"
+                Command="{Binding SetStrategyCommand}"
+                HorizontalOptions="Fill"/>
+        <Label Text="{Binding Response.Message, StringFormat='Message: {0}', TargetNullValue='Click button to set strategy'}"/>
+        <Label Text="{Binding Response.IsSuccess, StringFormat='IsSuccess: {0}'}"/>
+    </VerticalStackLayout>
+</ContentPage>

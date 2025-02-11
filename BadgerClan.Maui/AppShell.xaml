@@ -11,5 +11,10 @@
         Title="Controller"
         ContentTemplate="{DataTemplate local:GameControllerView}"
         Route="MainPage" />
+    
+    <ShellContent
+    Title="GrpcTest"
+    ContentTemplate="{DataTemplate local:GrpcTest}"
+    Route="GrpcTest" />
 
 </Shell>

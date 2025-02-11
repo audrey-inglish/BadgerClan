@@ -5,7 +5,7 @@ namespace BadgerClan.Api;
 
 public class GrpcStrategyService(StrategyService service) : IStrategyService
 {
-    public Task SetStrategy(SetStrategyRequest request)
+    public Task<SetStrategyResponse> SetStrategy(SetStrategyRequest request)
     {
         service.SetStrategy(request.StrategyName);
         return Task.FromResult(new SetStrategyResponse

@@ -2,12 +2,14 @@
 using System.ServiceModel;
 namespace BadgerClan.Shared;
 
+[DataContract]
 public class SetStrategyRequest
 {
     [DataMember(Order = 1)]
     public string StrategyName { get; set; }
 }
 
+[DataContract]
 public class SetStrategyResponse
 {
     [DataMember(Order = 1)]
@@ -22,5 +24,5 @@ public class SetStrategyResponse
 public interface IStrategyService
 {
     [OperationContract]
-    Task SetStrategy(SetStrategyRequest request);
+    Task<SetStrategyResponse> SetStrategy(SetStrategyRequest request);
 }
