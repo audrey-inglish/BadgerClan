@@ -21,7 +21,9 @@ builder.Services.AddSingleton<IStrategy, AmbushStrategy>();
 
 
 var app = builder.Build();
-app.MapGrpcService<IStrategyService>();
+//app.MapGrpcService<IStrategyService>();
+app.MapGrpcService<GrpcStrategyService>();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
