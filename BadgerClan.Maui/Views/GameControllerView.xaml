@@ -23,6 +23,11 @@
                        Text="{Binding NewApiUrl}"
                        Margin="0,5,0,5"
                        BackgroundColor="White"/>
+                <Picker Title="API Type"
+                        ItemsSource="{Binding ApiTypes}"
+                        SelectedItem="{Binding SelectedApiType}"
+                        Margin="0,5,0,5"
+                        BackgroundColor="White"/>   
 
                 <Button Text="Add API"
                         Command="{Binding AddNewApiCommand}"/>
