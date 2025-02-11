@@ -39,7 +39,7 @@ public static class MauiProgram
             baseAddress = "http://localhost:5140";
         }
 
-        builder.Services.AddSingleton<GrpcSchedulerClient>();
+        builder.Services.AddSingleton<GrpcStrategyClient>();
 
         builder.Services.AddSingleton<IApiService, ApiService>();
         builder.Services.AddHttpClient("GameControllerApi", client =>
@@ -69,7 +69,7 @@ public static class MauiProgram
     }
 }
 
-public class GrpcSchedulerClient : IDisposable
+public class GrpcStrategyClient : IDisposable
 {
 #if DEBUG
     private const string GrpcApiAddress = "http://localhost:5140";
@@ -80,7 +80,7 @@ public class GrpcSchedulerClient : IDisposable
     private GrpcChannel channel;
     public IStrategyService Client { get; }
 
-    public GrpcSchedulerClient(IConfiguration config)
+    public GrpcStrategyClient(IConfiguration config)
     {
         GrpcClientFactory.AllowUnencryptedHttp2 = true;
         channel = GrpcChannel.ForAddress(GrpcApiAddress);

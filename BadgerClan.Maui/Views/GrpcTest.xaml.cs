@@ -13,7 +13,7 @@ public partial class GrpcTest : ContentPage
 	}
 }
 
-public partial class GrpcTestViewModel(GrpcSchedulerClient client) : ObservableObject
+public partial class GrpcTestViewModel(GrpcStrategyClient client) : ObservableObject
 {
     [ObservableProperty]
     private SetStrategyResponse response;

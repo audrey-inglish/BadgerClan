@@ -1,4 +1,5 @@
 ﻿using BadgerClan.Maui.Services;
+using BadgerClan.Shared;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
@@ -13,12 +14,16 @@ namespace BadgerClan.Maui.ViewModels;
 public partial class GameControllerViewModel : ObservableObject
 {
     private readonly IApiService apiService;
+    private readonly GrpcStrategyClient grpcClient;
 
     [ObservableProperty]
     private string currentStrategy;
 
     [ObservableProperty]
     private string selectedApi;
+
+    [ObservableProperty]
+    private ApiType selectedApiType;
 
     [ObservableProperty]
     private string newApiName;
@@ -34,24 +39,30 @@ public partial class GameControllerViewModel : ObservableObject
         };
 
 
+
     public ObservableCollection<ApiSelectionModel> ApiSelections { get; set; } = new ObservableCollection<ApiSelectionModel>();
 
+
+    // picker items
+    public List<ApiType> ApiTypes { get; } = Enum.GetValues(typeof(ApiType)).Cast<ApiType>().ToList();
     public Dictionary<string, string> ApiStrategies { get; } = new Dictionary<string, string>();
 
     public List<string> AvailableStrategies { get; } = new List<string>
     { "RunGun", "DoNothing", "CornerRetreat", "Ambush" };
 
 
-    public GameControllerViewModel(IApiService apiService)
+    public GameControllerViewModel(IApiService apiService, GrpcStrategyClient grpcClient)
     {
         this.apiService = apiService;
+        this.grpcClient = grpcClient;
         CurrentStrategy = AvailableStrategies[1];
         SelectedApi = ApiUrls.Keys.First();
         SetApiUrl(SelectedApi);
 
+        // automatically filling in my REST APIs (for convenience)
         foreach (var api in ApiUrls.Keys)
         {
-            ApiSelections.Add(new ApiSelectionModel(api));
+            ApiSelections.Add(new ApiSelectionModel(api, ApiType.Rest));
         }
     }
 
@@ -87,7 +98,7 @@ public partial class GameControllerViewModel : ObservableObject
         if(NewApiName is not null && NewApiUrl is not null)
         {
             ApiUrls[NewApiName] = NewApiUrl;
-            ApiSelections.Add(new ApiSelectionModel(NewApiName));
+            ApiSelections.Add(new ApiSelectionModel(NewApiName, SelectedApiType));
 
             NewApiName = string.Empty;
             NewApiUrl = string.Empty;
@@ -104,7 +115,25 @@ public partial class GameControllerViewModel : ObservableObject
             {
                 ApiStrategies[api.ApiName] = CurrentStrategy;
 
-                await apiService.SetStrategyAsync(apiUrl, CurrentStrategy);
+                if (api.ClientType == ApiType.Rest)
+                {
+                    // Call the REST service
+                    await apiService.SetStrategyAsync(apiUrl, CurrentStrategy);
+                }
+                else if (api.ClientType == ApiType.Grpc)
+                {
+                    // Call the gRPC service
+                    var response = await grpcClient.Client.SetStrategy(new SetStrategyRequest { StrategyName = CurrentStrategy });
+
+                    if (response.IsSuccess)
+                    {
+                        Console.WriteLine(response.Message);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to set strategy: {response.Message}");
+                    }
+                }
             }
         }
     }
@@ -127,9 +156,18 @@ public partial class ApiSelectionModel : ObservableObject
     [ObservableProperty]
     private bool isSelected;
 
-    public ApiSelectionModel(string apiName)
+    [ObservableProperty]
+    private ApiType clientType;
+
+    public ApiSelectionModel(string apiName, ApiType type)
     {
         ApiName = apiName;
+        ClientType = type;
     }
 }
 
+public enum ApiType
+{
+    Rest,
+    Grpc
+}
