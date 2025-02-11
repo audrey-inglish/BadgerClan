@@ -5,6 +5,10 @@ using Microsoft.Extensions.DependencyInjection;
 using BadgerClan.Maui.ViewModels;
 using BadgerClan.Maui.Views;
 using CommunityToolkit.Maui;
+using Grpc.Net.Client;
+using BadgerClan.Shared;
+using ProtoBuf.Grpc.Client;
+using Microsoft.Extensions.Configuration;
 
 namespace BadgerClan.Maui;
 
@@ -59,5 +63,28 @@ public static class MauiProgram
     {
         builder.Services.AddTransient<GameControllerViewModel>();
         return builder;
+    }
+}
+
+public class GrpcSchedulerClient : IDisposable
+{
+#if DEBUG
+    private const string GrpcApiAddress = "https://localhost:5001";
+#else
+    private const string GrpcApiAddress = "https://localhost:5001";
+#endif
+
+    private GrpcChannel channel;
+    public IStrategyService Client { get; }
+
+    public GrpcSchedulerClient(IConfiguration config)
+    {
+        GrpcClientFactory.AllowUnencryptedHttp2 = true;
+        channel = GrpcChannel.ForAddress(GrpcApiAddress);
+        Client = channel.CreateGrpcService<IStrategyService>();
+    }
+    public void Dispose()
+    {
+        throw new NotImplementedException();
     }
 }

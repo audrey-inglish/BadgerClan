@@ -4,6 +4,7 @@ using BadgerClan.Api.Strategies;
 using Microsoft.AspNetCore.Mvc;
 using ProtoBuf.Grpc.Server;
 using BadgerClan.Shared;
+using Microsoft.AspNetCore.Builder;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCodeFirstGrpc();
