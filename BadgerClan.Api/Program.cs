@@ -2,8 +2,11 @@ using BadgerClan.Logic;
 using BadgerClan.Api;
 using BadgerClan.Api.Strategies;
 using Microsoft.AspNetCore.Mvc;
+using ProtoBuf.Grpc.Server;
+using BadgerClan.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCodeFirstGrpc();
 
 // Add services to the container.
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -17,6 +20,7 @@ builder.Services.AddSingleton<IStrategy, AmbushStrategy>();
 
 
 var app = builder.Build();
+app.MapGrpcService<IStrategyService>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -59,3 +63,5 @@ app.MapPost("/", async ([FromBody] MoveRequest request, [FromServices] StrategyS
 
 //app.Run();
 app.Run();
+
+

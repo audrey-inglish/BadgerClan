@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadgerClan.Api", "BadgerCla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadgerClan.Maui", "BadgerClan.Maui\BadgerClan.Maui.csproj", "{2D99A5B9-5AE4-41F3-9138-BF8545EF3143}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BadgerClan.Shared", "BadgerClan.Shared\BadgerClan.Shared.csproj", "{E05570FA-8C8C-4A60-9251-DEFFC618A16A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{2D99A5B9-5AE4-41F3-9138-BF8545EF3143}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D99A5B9-5AE4-41F3-9138-BF8545EF3143}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D99A5B9-5AE4-41F3-9138-BF8545EF3143}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E05570FA-8C8C-4A60-9251-DEFFC618A16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E05570FA-8C8C-4A60-9251-DEFFC618A16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E05570FA-8C8C-4A60-9251-DEFFC618A16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E05570FA-8C8C-4A60-9251-DEFFC618A16A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
