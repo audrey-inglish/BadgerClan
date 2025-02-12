@@ -62,3 +62,11 @@ jobs:
           app-name: 'badgerclan-api-2'
           slot-name: 'Production'
           package: "${{env.DOTNET_ROOT}}/myapp"    
+    
+      - name: Deploy to Azure Web App (gRPC)
+        id: deploy-to-webapp-grpc
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'badgerclan-grpc-api1'
+          slot-name: 'Production'
+          package: "${{env.DOTNET_ROOT}}/myapp"    
