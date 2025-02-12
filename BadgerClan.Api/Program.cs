@@ -19,6 +19,10 @@ builder.Services.AddSingleton<IStrategy, DoNothingStrategy>();
 builder.Services.AddSingleton<IStrategy, CornerRetreatStrategy>();
 builder.Services.AddSingleton<IStrategy, AmbushStrategy>();
 
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.Configure(builder.Configuration.GetSection("Kestrel"));
+});
 
 var app = builder.Build();
 //app.MapGrpcService<IStrategyService>();
